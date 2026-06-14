@@ -1,0 +1,17 @@
+# Netlify build settings for the AI ROI Tracker.
+# The app lives in the ai-roi-tracker/ subfolder, so `base` points Netlify there;
+# `publish` is resolved relative to that base.
+
+[build]
+  base = "ai-roi-tracker"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Single-page app: serve index.html for any unknown path.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

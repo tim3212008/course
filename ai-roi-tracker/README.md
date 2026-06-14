@@ -51,12 +51,31 @@ npm run preview  # preview the production build
 
 ## Deploy
 
-Pushing to the tracked branches triggers
-[`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml), which builds the
-app and publishes it to **GitHub Pages** at `https://<user>.github.io/course/`.
+The app is a static bundle, so any static host works. The base path adjusts
+automatically per host (root hosts get `/`, GitHub Pages gets `/course/`).
 
-> One-time setup: in the repo, go to **Settings → Pages → Build and deployment →
-> Source → GitHub Actions**.
+### Netlify (recommended here — builds off-GitHub)
+
+A [`netlify.toml`](../netlify.toml) at the repo root is preconfigured. On
+[netlify.com](https://app.netlify.com): **Add new site → Import an existing
+project → pick this repo**. It reads the config automatically (base
+`ai-roi-tracker/`, build `npm run build`, publish `dist`) and redeploys on every
+push. No GitHub Actions required.
+
+### Vercel
+
+[`vercel.json`](./vercel.json) is preconfigured. On
+[vercel.com](https://vercel.com): **Add New → Project → import this repo**, and
+set **Root Directory = `ai-roi-tracker`**. Vercel auto-detects Vite and deploys
+on push.
+
+### GitHub Pages (needs Actions enabled)
+
+Pushing triggers [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml),
+which publishes to `https://<user>.github.io/course/`.
+
+> Requires: **Settings → Pages → Source → GitHub Actions**, and an account where
+> GitHub Actions is enabled (it's blocked while an account is locked for billing).
 
 ## Tech
 
